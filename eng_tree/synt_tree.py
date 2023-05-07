@@ -17,14 +17,13 @@ class TreePermutations:
     Available by `paraphrases` attribute.
     """
 
-    ids = []
-    sub_paraphrases = []
-    paraphrases = []
+    ids = None
+    sub_paraphrases = None
+    paraphrases = None
 
-    def __init__(self,
-                 in_tree: str,
-                 parented_label: str,
-                 allowed_nested_labels: set[str]) -> None:
+    def __init__(
+            self, in_tree: str, parented_label: str,
+            allowed_nested_labels: set[str]) -> None:
         self.tree = self.make_tree(in_tree)
         self.parented_label = parented_label
         self.allowed_labels = allowed_nested_labels
@@ -51,11 +50,9 @@ class TreePermutations:
         return main_tree
 
 
-    def get_positions(self,
-                        main_tree: Tree = None,
-                        sample: set[str] = None,
-                        req_label: str = None
-                        ) -> list[tuple[int]]:
+    def get_positions(
+            self, main_tree: Tree = None, sample: set[str] = None,
+            req_label: str = None) -> list[tuple[int]]:
         """Find all the subtrees with the required label that match a
         sample.
         Return a list of positions for the subtrees needed.
@@ -72,16 +69,15 @@ class TreePermutations:
         for pos in main_tree.treepositions():
             subtree = main_tree[pos]
             if isinstance(subtree, Tree) and subtree.label() == req_label:
-                labels = set(node.label() for node in subtree)
-                if not labels - sample:
+                labels = set(node.label() for node in subtree if isinstance(node, Tree))
+                if len(labels) > 1 and not labels - sample:
                     req_positions.append(pos)
 
         return req_positions
 
 
-    def permute_values(self,
-                     nodes: Tree,
-                     req_label: str = None) -> list[Tree]:
+    def permute_values(
+            self, nodes: Tree, req_label: str = None) -> list[Tree]:
         """Get all the required labels and their indices.
         Return a list of subtree permutations.
         """
@@ -109,10 +105,9 @@ class TreePermutations:
         return tree_perms
 
 
-    def generate_trees(self,
-                            subtrees: list[list[Tree]],
-                            positions: list[tuple[int]],
-                            main_tree: Tree = None) -> list[Tree]:
+    def generate_trees(
+            self, subtrees: list[list[Tree]], positions: list[tuple[int]],
+            main_tree: Tree = None) -> list[Tree]:
         """Make a list of all possible complete trees using permuted
         subtrees and their positions in the main tree.
         Return the list of `Tree` objects.
