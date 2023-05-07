@@ -7,6 +7,10 @@ from .synt_tree import TreePermutations
 
 
 class ParaphraseListView(APIView):
+    """English paraphraser class. Works with required parented labels
+    and inner ones.
+    """
+
     required_label = 'NP'
     inner_labels = {'NP', ',', 'CC'}
 
@@ -18,6 +22,10 @@ class ParaphraseListView(APIView):
     }
 
     def get(self, request):
+        """Makes paraphrases for the inputed syntax tree using
+        the `TreePermutations` class. The output is in JSON format.
+        """
+
         tree = request.query_params.get('tree')
         limit = request.query_params.get('limit', 20)
 

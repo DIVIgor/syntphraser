@@ -125,36 +125,7 @@ class TreePermutations:
         for perm in perm_combinations:
             result = main_tree.copy(deep=True)
             for i, index in enumerate(positions):
-                # print(f'i: {i}')
-                # print(f'index: {index}')
                 result[index] = perm[i]
-                # print(result[index])
             whole_trees.append({'tree': result})
 
         return whole_trees[1:]
-
-
-# new_tree = TreePermutations(inp, 'NP', allowed_labels)
-# matches = new_tree.get_positions()
-# subs = [new_tree.permute_values(new_tree.tree[match]) for match in matches]
-# # for el in subs[1]:
-# #     print(el)
-# #     print('-'*50)
-# full_trees = new_tree.generate_trees(subs, matches)
-# for tree in full_trees:
-#     print(str(tree))
-#     print('-'*50)
-
-# print(new_tree.tree[2, 1, 1, 1, 1])
-
-# for tree in new_tree.paraphrases:
-#     print(tree)
-#     print('-'*50)
-
-# tree = make_tree(inp)
-# matches = get_np_subtrees(tree, allowed_labels)
-# subs = [permute_node(tree[i]) for i in matches]
-# full_trees = generate_full_trees(tree, subs, matches)
-
-# print(tree)
-# print(full_trees[0])
