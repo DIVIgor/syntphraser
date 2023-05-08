@@ -1,5 +1,11 @@
 # Paraphrases test task
 
+## Stack
+- NLTK
+- Django
+- Django REST Framework
+- Unittest
+
 ## How to run
 - Run terminal and enter a path to a project folder.
 - Clone the repo:
